@@ -53,13 +53,14 @@ class User(Base):
     password = sq.Column(sq.String(72), nullable=False)
     tokens = relationship("Token", lazy="joined", back_populates="user")
     advs = relationship("Advertisement", lazy="joined", back_populates="user")
-    # roles = relationship(
-    #     Role, secondary=user_roles, lazy="joined"
-    # )
+    role = sq.Column(sq.String(16), nullable=False, default='user')
 
     @property
     def dict(self):
-        return {"id": self.id, "name": self.name}
+        return {
+            "id": self.id,
+            "name": self.name,
+            "advs": self.advs}
 
 
 class Token(Base):

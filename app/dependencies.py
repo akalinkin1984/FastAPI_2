@@ -3,11 +3,11 @@ import uuid
 import datetime
 
 from fastapi import Depends, Header, HTTPException
-from models import Session, Token
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from config import TOKEN_TTL
+from models import Session, Token
 
 
 async def get_session() -> AsyncSession:

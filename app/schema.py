@@ -69,7 +69,8 @@ class LoginResponse(BaseModel):
 
 
 class CreateUserRequest(BaseUser):
-    pass
+
+    role: Literal['admin'] | None = None
 
 
 class CreateUserResponse(IdReturnBase):
@@ -81,3 +82,17 @@ class GetUserResponse(BaseModel):
     id: int
     name: str
     advs: List[GetAdvResponse]
+
+
+class UpdateUserRequest(BaseModel):
+
+    name: str | None = None
+    password: str | None = None
+
+
+class UpdateUserResponse(IdReturnBase):
+    pass
+
+
+class DeleteUserResponse(StatusSuccessBase):
+    pass

@@ -13,4 +13,4 @@ PG_PORT = os.getenv('PG_PORT')
 
 DSN = f'postgresql+asyncpg://{PG_USER}:{PG_PASSWORD}@{PG_HOST}:{PG_PORT}/{PG_NAME}'
 
-TOKEN_TTL = 172800
+TOKEN_TTL = int(os.getenv('TOKEN_TTL', 172800))
