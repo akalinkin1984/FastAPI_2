@@ -33,23 +33,23 @@ response = requests.post(
 
 
 # получение юзера по id
-# response = requests.get("http://127.0.0.1:8080/user/1")
+# response = requests.get("http://127.0.0.1:8080/user/2")
 
 
 # изменение юзера
 # response = requests.patch("http://127.0.0.1:8080/user/2",
 #                           json={
-#                               'name': 'Sasha',
-#                               'password': '12345',
+#                               'name': 'Petya',
+#                               'password': '1234567',
 #                                 },
-#                           headers={"x-token": 'bfcff199-31f4-4949-9878-323c328f5c33'}
+#                           headers={"x-token": '1ef7258f-8757-4290-8b53-9d408cf24e13'}
 #                           )
 
 
 # удаление юзера
 # response = requests.delete(
-#     "http://127.0.0.1:8080/user/5",
-#     headers={"x-token": 'bfcff199-31f4-4949-9878-323c328f5c33'}
+#     "http://127.0.0.1:8080/user/3",
+#     headers={"x-token": '31f8f81d-cba3-431f-8ea8-822eb676e52d'}
 # )
 
 
@@ -57,11 +57,11 @@ response = requests.post(
 # response = requests.post(
 #     "http://127.0.0.1:8080/advertisement",
 #     json={
-#         'title': 'Telephone',
+#         'title': 'TV',
 #         'description': 'Samsung',
-#         'price': 128.75,
+#         'price': 130,
 #     },
-#     headers={"x-token": 'bfcff199-31f4-4949-9878-323c328f5c33'}
+#     headers={"x-token": '1ef7258f-8757-4290-8b53-9d408cf24e13'}
 # )
 
 
@@ -70,22 +70,22 @@ response = requests.post(
 
 
 # поиск объявления по полям
-# response = requests.get("http://127.0.0.1:8080/advertisement?qs_params=Sam")
+# response = requests.get("http://127.0.0.1:8080/advertisement?qs_params=TV")
 
 
 # изменение объявления
 # response = requests.patch(
 #     "http://127.0.0.1:8080/advertisement/2",
 #     json={
-#         "title": "New title2",
+#         "title": "New title",
 #     },
-#     headers={"x-token": 'f327a2ad-97f0-42b4-abf6-2f138ec3c14b'},
+#     headers={"x-token": '31f8f81d-cba3-431f-8ea8-822eb676e52d'},
 # )
 
 
 # удаление объявления
-# response = requests.delete("http://127.0.0.1:8080/advertisement/2",
-#                            headers={"x-token": '73661ec2-886f-43fe-937b-b8397abfc308'})
+# response = requests.delete("http://127.0.0.1:8080/advertisement/1",
+#                            headers={"x-token": '31f8f81d-cba3-431f-8ea8-822eb676e52d'})
 
 
 print(response.status_code)

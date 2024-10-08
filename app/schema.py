@@ -19,7 +19,7 @@ class GetAdvResponse(BaseModel):
     title: str
     description: str
     price: float
-    author: str
+    author: int
     create_date: datetime.datetime
 
 

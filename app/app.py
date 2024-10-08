@@ -64,7 +64,7 @@ async def search_adv(qs_params: str, session: SessionDependency):
              filter(models.Advertisement.title.contains(qs_params) |
                     models.Advertisement.description.contains(qs_params)))
     data = await session.execute(query)
-    res = data.scalars().all()
+    res = data.unique().scalars().all()
 
     return {'result': res}
 
@@ -108,8 +108,12 @@ async def update_user(
         user = await crud.get_item(session, models.User, user_id)
         user_patch = user_json.dict(exclude_unset=True)
 
+        if 'password' in user_patch:
+            user_patch['password'] = auth.hash_password(user_patch['password'])
+
         for field, value in user_patch.items():
             setattr(user, field, value)
+
         await crud.add_item(session, user)
         return user.id_dict
     raise fastapi.HTTPException(403, 'Not enough rights')
@@ -119,6 +123,5 @@ async def update_user(
 async def delete_user(user_id: int, session: SessionDependency, token: TokenDependency):
     if token.user.role == 'admin' or token.user_id == user_id:
         await crud.delete_item(session, models.User, user_id)
-        await crud.delete_item(session, models.Token, token.id)
         return STATUS_SUCCESS_RESPONSE
     raise fastapi.HTTPException(403, 'Not enough rights')

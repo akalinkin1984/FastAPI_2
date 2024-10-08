@@ -23,8 +23,8 @@ class Advertisement(Base):
     _model = "Advertisement"
 
     id = sq.Column(sq.Integer, primary_key=True)
-    title = sq.Column(sq.String(128), nullable=False, index=True)
-    description = sq.Column(sq.String(256), nullable=False, index=True)
+    title = sq.Column(sq.String(128), nullable=False)
+    description = sq.Column(sq.String(256), nullable=False)
     price = sq.Column(sq.Float, nullable=False)
     author = sq.Column(sq.ForeignKey("user.id"))
     create_date = sq.Column(sq.DateTime, default=datetime.date.today())
@@ -51,7 +51,7 @@ class User(Base):
     id = sq.Column(sq.Integer, primary_key=True)
     name = sq.Column(sq.String(100), unique=True, nullable=False)
     password = sq.Column(sq.String(72), nullable=False)
-    tokens = relationship("Token", lazy="joined", back_populates="user")
+    tokens = relationship("Token", lazy="joined", back_populates="user", cascade='all, delete-orphan')
     advs = relationship("Advertisement", lazy="joined", back_populates="user")
     role = sq.Column(sq.String(16), nullable=False, default='user')
 
@@ -60,7 +60,8 @@ class User(Base):
         return {
             "id": self.id,
             "name": self.name,
-            "advs": self.advs}
+            "advs": list(self.advs)
+        }
 
 
 class Token(Base):
